@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
@@ -38,7 +39,7 @@ class BytecodeUtils {
 
   static void injectBootstrapClasses(
       final Instrumentation instrumentation, final String... classNames) throws IOException {
-    final File tempJarFile = File.createTempFile("feline", ".jar");
+    final File tempJarFile = Files.createTempFile("feline", ".jar").toFile();
     tempJarFile.deleteOnExit();
 
     final ClassLoader classLoader = Feline.class.getClassLoader();
